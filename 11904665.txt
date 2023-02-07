@@ -1,0 +1,72 @@
+reg_no:11904665
+
+
+
+1. write a shell script function that take name of a file or directory as unlimited argument and reports if it is a regular file, a directory, or another type of file. 
+Also perform an ls command against the file or directory with the long listing option. Write for all the mention details . also create function function “file_count” and call it in your script. If you use variable in your function, remember to make it a local variable. [5]
+sol:
+file_one() {
+  for file in "$@"
+ do
+    if [ -f "$file" ]
+ then
+      echo "$file is a regular file"
+ls -l "$file"
+
+ elif [ -d "$file" ]
+ then
+      echo "$file is a directory"
+      ls -l "$file"
+    else
+      echo "$file is another type of file"
+      ls -l "$file"
+    fi
+  done
+}
+
+file_two() {
+  local count=0
+  for file in "$@"
+ do
+    if [ -f "$file" ]
+ then
+      ((count++))
+    fi
+done
+  echo "Total regular files: $count"
+}
+file_one $@
+file_two $@
+-----------------------------------------------------------------------------------------------------------------------------------
+
+2. You need to find a file named myfile.txt somewhere in your Linux file system. Which is thecorrect command to do this? [2]
+sol:
+
+ this is the command to find the file in lunux file system.
+ find / -name myfile.txt
+------------------------------------------------------------------------------------------------------------------------------------
+
+3. Write a scipt to Lock down the file or directory permission for folder1 files as per following requirement  [8]
+mkdir folder1
+touch f_{1..3}
+.file.sh folder1/
+sol:
+
+mkdir -p folder1
+
+touch folder1/f_{1..3}
+
+# Set the permissions for folder1 to 700 (rwx for owner only)
+chmod 700 folder1
+
+# Set the permissions for all files in folder1 to 600 (rw for owner only)
+find folder1 -type f -exec chmod 600 {} +
+
+
+
+
+
+
+
+
+
